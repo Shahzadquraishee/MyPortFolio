@@ -1,0 +1,200 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shahzad Quraishee - CV</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .header {
+      text-align: center;
+      border-bottom: 2px solid #4A7A77;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 2.5em;
+      color: #1F4037;
+    }
+    .header p {
+      margin: 5px 0;
+      font-size: 1.1em;
+      color: #666;
+    }
+    .section {
+      margin-bottom: 30px;
+    }
+    .section h2 {
+      font-size: 1.8em;
+      color: #1F4037;
+      border-bottom: 1px solid #E3A857;
+      padding-bottom: 5px;
+      margin-bottom: 15px;
+    }
+    .section p, .section ul {
+      margin: 0 0 10px;
+      font-size: 1em;
+      color: #333;
+    }
+    .section ul {
+      padding-left: 20px;
+    }
+    .section ul li {
+      margin-bottom: 8px;
+    }
+    .job {
+      margin-bottom: 20px;
+    }
+    .job h3 {
+      font-size: 1.2em;
+      color: #4A7A77;
+      margin: 0 0 5px;
+    }
+    .job p {
+      font-size: 0.95em;
+      color: #666;
+      margin: 0 0 5px;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+    }
+    .skills-grid li {
+      background: #F8ECE4;
+      padding: 8px;
+      border-radius: 5px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Shahzad Quraishee</h1>
+      <p>Website & Systems Expert | Software Engineer</p>
+      <p>Email: shahzadquraishee7@gmail.com | Phone: +93787818301 | WhatsApp: +93787818301</p>
+      <p>Kabul, Afghanistan</p>
+    </div>
+
+    <div class="section">
+      <h2>Professional Summary</h2>
+      <p>Dedicated Software Engineer and Website & Systems Expert at the National Examination Authority of Afghanistan (NEXA) with over two years of experience in development and training. Specializing in React, Django, PHP Laravel, and Flutter, I have successfully led projects like the NEXA official website and a Thesis Management System with plagiarism detection. Passionate about delivering innovative solutions, mentoring aspiring developers, and staying ahead with the latest tech trends.</p>
+    </div>
+
+    <div class="section">
+      <h2>Professional Experience</h2>
+      <div class="job">
+        <h3>Website & Systems Expert – National Examination Authority (NEXA)</h3>
+        <p>Kabul, Afghanistan | 2023 – Present</p>
+        <ul>
+          <li>Designed and developed the official NEXA website, serving a large community with modern UI/UX, improving user engagement by 40%.</li>
+          <li>Implemented robust systems for examination management, reducing processing time by 25% through automation.</li>
+          <li>Mentored over 50 students in web and mobile development, fostering the next generation of developers.</li>
+        </ul>
+      </div>
+      <div class="job">
+        <h3>Software Developer – Freelance Projects</h3>
+        <p>Remote | 2022 – 2023</p>
+        <ul>
+          <li>Developed a Thesis Management & Plagiarism Detection System using Django and Python libraries (NLTK, spaCy, scikit-learn), achieving 95% accuracy in plagiarism detection.</li>
+          <li>Built a Training Portal with React and Laravel, enabling over 100 students to access learning resources seamlessly.</li>
+          <li>Created a mobile app for local businesses using Flutter, increasing client revenue by 15% through improved customer access.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Education</h2>
+      <p>Bachelor’s Degree in Computer Science</p>
+      <p>Kabul University, Kabul, Afghanistan | 2018 – 2022</p>
+    </div>
+
+    <div class="section">
+      <h2>Skills</h2>
+      <ul class="skills-grid">
+        <li>React (90% Proficiency)</li>
+        <li>Django (85% Proficiency)</li>
+        <li>Flutter (80% Proficiency)</li>
+        <li>PHP Laravel</li>
+        <li>Python (NLTK, spaCy, scikit-learn)</li>
+        <li>UI/UX Design</li>
+        <li>Mentoring & Training</li>
+        <li>Project Management</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Projects</h2>
+      <ul>
+        <li><strong>NEXA Official Website:</strong> Led the design and development of a responsive website for Afghanistan’s examination authority using React and Django, ensuring accessibility for a large user base.</li>
+        <li><strong>Thesis Management & Plagiarism Detection System:</strong> Engineered a Django-based system with advanced plagiarism detection, reducing academic misconduct by 30% in partnered institutions.</li>
+        <li><strong>Training Portal:</strong> Developed a platform for student training in web and mobile development using React and Laravel, enhancing learning outcomes for over 100 students.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Languages</h2>
+      <ul>
+        <li>Pashto (Native)</li>
+        <li>Dari (Fluent)</li>
+        <li>English (Fluent)</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
