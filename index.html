@@ -2,7 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" href="/MyPortFolio/logo.jpeg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Your awesome portfolio built with React and Vite" />
+<meta property="og:title" content="My Portfolio" />
+<meta property="og:description" content="Frontend portfolio by Shahzad Quraishee" />
+<meta property="og:image" content="/cover-image.png" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Shahzad Quraishee - Portfolio</title>
   <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
@@ -81,7 +88,7 @@
     }
     .badge {
       background-color: rgba(227, 168, 87, 0.2);
-      color: #E3A857;
+      color: #935602;
       padding: 4px 10px;
       border-radius: 12px;
       font-size: 12px;
@@ -114,9 +121,11 @@
     .hamburger span {
       width: 25px;
       height: 3px;
-      background-color: #F8ECE4;
+      background-color: #d2824c;
       transition: all 0.3s ease;
     }
+
+
     .mobile-menu {
       display: none;
       position: absolute;
@@ -256,7 +265,7 @@
       return (
         <section id="home" className="hero-bg">
           <div id="particles-js"></div>
-          <div className="hero-content container mx-auto flex flex-col md:flex-row items-center justify-between px-6 pt-32 pb-16">
+          <div className="hero-content container mx-auto flex flex-col md:flex-row items-center justify-between px-6 pt-64 pb-16">
             <div className="text-center md:text-left md:w-1/2 fade-in">
               <h1 className="text-5xl md:text-6xl font-extrabold mb-4 text-[--ivory-dawn]" style={{ color: colors.ivoryDawn }}>
                 Shahzad Quraishee
@@ -306,7 +315,7 @@
           id: 1,
           title: 'Thesis Management & Plagiarism Detection System',
           desc: 'A Django-based system for managing theses with advanced plagiarism detection using Python libraries like NLTK, spaCy, and scikit-learn.',
-          img: 'https://images.unsplash.com/photo-1516321318423-8e63faaa89f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+          img: 'thesis.png',
           tech: ['Django', 'Python', 'NLTK'],
           demo: '#',
           github: '#'
@@ -373,7 +382,7 @@
             About Me
           </h2>
           <div className="max-w-4xl mx-auto bg-[--charcoal-night]/50 p-6 rounded-xl">
-            <p className="text-xl text-justify text-[--ivory-dawn] font-light leading-loose" style={{ color: colors.ivoryDawn }}>
+            <p className="text-xl text-justify text-[--ivory-dawn]  leading-loose" style={{ color: colors.ivoryDawn }}>
               I'm Shahzad Quraishee, a Software Engineer and Website & Systems Expert at the National Examination Authority of Afghanistan (NEXA). With two years of experience in development and training students, I specialize in React, Django, PHP Laravel, and Flutter for mobile apps. My notable projects include a Thesis Management and Plagiarism Detection System using Python libraries like NLTK, spaCy, and scikit-learn, and the official NEXA website, serving a large community with modern UI/UX. Passionate about creating impactful solutions, I also mentor aspiring developers and stay updated with the latest tech trends.
             </p>
           </div>
